@@ -1,22 +1,18 @@
 const express = require("express");
-const errorHandler = require("./middlewares/errorHandler");
 
-const router = require("./routes/router");
+const router = require("./routes");
+const errorHandler = require("./middlewares/errorHandler");
+const { PORT } = require('./config')
 
 // initialize express app
 const app = express();
 
-// middlewares
+// global middlewares
 app.use(express.json());
 
-// initialize routes
+// router & error handler
 app.use("/", router);
-
-app.get("/*", (req, res) => {
-  res.status(404);
-  res.json({ message: "endpoint does not exist" });
-});
-
 app.use(errorHandler);
 
-app.listen(3005, () => console.log("listening on port 3005"));
+// listen to port
+app.listen(PORT, () => console.log(`server listening on http://localhost:${PORT}`));

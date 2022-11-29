@@ -1,10 +1,9 @@
 const db = require("./db");
 
+// test database query
 db.promise()
 	.execute(
-		` DELETE FROM user
-      Where id IN (3, 4)
-  `
+		` show tables`
 	)
 	.then((result) => console.log(result))
 	.catch((err) => console.error(err));
